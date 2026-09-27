@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aplikasi Laporan Keuangan Masjid</title>
+<meta name="description" content="Aplikasi pencatatan laporan keuangan masjid dengan export PDF dan Excel berumus.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128221;</text></svg>">
+<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+
+<header class="bilah tanpa-cetak">
+  <div>
+    <h1>Aplikasi Laporan Keuangan Masjid</h1>
+    <p class="bilah__status" id="statusSimpan">Memuat&hellip;</p>
+  </div>
+  <nav class="bilah__aksi">
+    <button type="button" class="tombol" data-aksi="excel">Export Excel</button>
+    <button type="button" class="tombol" data-aksi="pdf">Export PDF</button>
+    <button type="button" class="tombol tombol--garis" data-aksi="cetak">Cetak</button>
+    <button type="button" class="tombol tombol--garis" data-aksi="cadangkan">Cadangkan JSON</button>
+    <button type="button" class="tombol tombol--garis" data-aksi="muat">Muat JSON</button>
+    <button type="button" class="tombol tombol--bahaya" data-aksi="reset">Reset</button>
+    <input type="file" id="berkasJson" accept="application/json,.json" hidden>
+  </nav>
+</header>
+
+<div class="tab tanpa-cetak">
+  <button type="button" data-tab="editor" class="aktif">Entri Data</button>
+  <button type="button" data-tab="pratinjau">Pratinjau Laporan</button>
+</div>
+
+<main>
+  <section id="panelEditor">
+    <div class="kartu">
+      <div class="kartu__kepala"><h2 class="kartu__judul">Informasi Laporan</h2></div>
+      <div class="kisi">
+        <label class="isian">
+          <span>Judul laporan (tampil di baris paling atas)</span>
+          <input type="text" id="metaJudul" data-meta="judul" placeholder="LAPORAN KEUANGAN MASJID ASY-SYIFA">
+        </label>
+        <label class="isian">
+          <span>Periode mulai (untuk nama berkas)</span>
+          <input type="date" data-meta="periodeMulai">
+        </label>
+        <label class="isian">
+          <span>Periode selesai (untuk nama berkas)</span>
+          <input type="date" data-meta="periodeSelesai">
+        </label>
+      </div>
+    </div>
+
+    <div id="daftarBagian"></div>
+
+    <button type="button" class="tombol tombol--tambah" data-aksi="tambah-bagian">+ Tambah Bagian / Sumber Dana</button>
+
+    <div class="kartu">
+      <div class="kartu__kepala">
+        <h2 class="kartu__judul">Penanda Tangan</h2>
+        <div class="kartu__aksi">
+          <button type="button" class="tombol tombol--kecil" data-aksi="tambah-ttd">+ Tambah</button>
+        </div>
+      </div>
+      <p class="petunjuk">Kolom <em>Posisi</em> menentukan letak tanda tangan: kiri dan kanan disusun berdampingan, tengah diletakkan di bawahnya.</p>
+      <div class="kisi" id="daftarTtd"></div>
+    </div>
+
+    <div class="kartu">
+      <div class="kartu__kepala"><h2 class="kartu__judul">Rekapitulasi Seluruh Bagian</h2></div>
+      <div class="rekap" id="rekap"></div>
+    </div>
+  </section>
+
+  <section id="panelPratinjau" hidden>
+    <div class="lembar" id="pratinjau"></div>
+  </section>
+</main>
+
+<script src="vendor/exceljs.min.js"></script>
+<script src="vendor/jspdf.umd.min.js"></script>
+<script src="vendor/jspdf.plugin.autotable.min.js"></script>
+<script src="assets/js/format.js"></script>
+<script src="assets/js/model.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/export-excel.js"></script>
+<script src="assets/js/export-pdf.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
